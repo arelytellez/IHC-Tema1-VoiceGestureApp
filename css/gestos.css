@@ -1,0 +1,262 @@
+/* ===================================== */
+/* FUENTE GENERAL */
+/* ===================================== */
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(180deg, #1a0033, #2d0066, #4b0082);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* ===================================== */
+/* EFECTO ESTRELLAS */
+/* ===================================== */
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.15;
+    z-index: -1;
+}
+
+/* ===================================== */
+/* PANTALLA DE INICIO */
+/* ===================================== */
+
+.pantalla-inicio {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.contenido-inicio {
+    background: linear-gradient(145deg, #6a00ff, #b300ff);
+    padding: 60px;
+    border-radius: 30px;
+    border: 6px solid #ff00cc;
+    box-shadow:
+        0 0 20px #ff00cc,
+        0 0 40px #b300ff;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* TITULO PRINCIPAL */
+
+.titulo-bienvenida {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 850;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+    white-space: nowrap;
+
+    text-shadow:
+        0 0 5px #ff00cc,
+        0 0 15px #ff00cc,
+        0 0 25px #ff66ff;
+
+    margin-bottom: 40px;
+}
+
+/* DESCRIPCIÓN */
+
+.descripcion {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* BOTÓN */
+
+.btn-comenzar {
+    background: linear-gradient(90deg, #ff00cc, #ff66ff);
+    border: none;
+    padding: 15px 60px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    color: white;
+    transition: 0.3s;
+    box-shadow: 0 0 20px #ff00cc;
+}
+
+.btn-comenzar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px #ff00cc;
+}
+
+/* ===================================== */
+/* NAVBAR */
+/* ===================================== */
+
+.navbar {
+    background: transparent !important;
+}
+
+.titulo-principal {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+
+    text-shadow:
+        0 0 10px #ff00cc,
+        0 0 20px #ff00cc;
+}
+
+/* ===================================== */
+/* MARCO CÁMARA */
+/* ===================================== */
+
+canvas {
+    border-radius: 20px;
+    border: 6px solid #ff00cc;
+    box-shadow:
+        0 0 20px #ff00cc,
+        0 0 40px #b300ff;
+}
+
+/* ===================================== */
+/* ESTADO Y ORDEN */
+/* ===================================== */
+
+#estado,
+#orden {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+
+    text-shadow:
+        0 0 10px #ff00cc,
+        0 0 20px #ff00cc;
+}
+
+/* ===================================== */
+/* TARJETAS */
+/* ===================================== */
+
+.card {
+    background: linear-gradient(145deg, #5e00a3, #8a00d4);
+    border-radius: 25px;
+    border: 4px solid #ff00cc;
+    box-shadow:
+        0 0 20px #ff00cc,
+        0 0 30px #b300ff;
+}
+
+/* TITULOS TARJETAS (Gestos y Funciones / Historial) */
+
+.card-header {
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    color: white;
+
+    text-shadow:
+        0 0 10px #ff00cc,
+        0 0 20px #ff00cc;
+}
+
+/* TITULO INTERNO TARJETA */
+
+.card h4 {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    text-shadow:
+        0 0 10px #ff00cc,
+        0 0 20px #ff00cc;
+}
+
+/* ===================================== */
+/* LISTA GESTOS */
+/* ===================================== */
+
+.panel-gestos ul li {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
+}
+
+/* ===================================== */
+/* HISTORIAL ORDENES */
+/* ===================================== */
+
+#historialOrdenes .list-group-item {
+    background: transparent;
+    border: none;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+
+    text-shadow:
+        0 0 10px #ff00cc,
+        0 0 20px #ff00cc;
+
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+/* BOTÓN LIMPIAR */
+
+.btn-danger {
+    background: linear-gradient(90deg, #ff0066, #ff3399);
+    border: none;
+    font-weight: 700;
+    border-radius: 20px;
+}
+
+.btn-danger:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #ff0066;
+}
+
+/* ===================================== */
+/* FOOTER */
+/* ===================================== */
+
+footer {
+    background: transparent;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px #ff00cc;
+}
+.btn-iniciar {
+    background: linear-gradient(45deg, #00f5ff, #8a2be2);
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 12px 30px;
+    border-radius: 30px;
+    box-shadow: 0 0 15px #8a2be2;
+    transition: 0.3s ease;
+}
+
+.btn-iniciar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #00f5ff;
+}
+
+.btn-detener {
+    background: linear-gradient(45deg, #ff0040, #ff7300);
+    box-shadow: 0 0 15px #ff0040;
+}

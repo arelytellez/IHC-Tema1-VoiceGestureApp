@@ -1,0 +1,160 @@
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Montserrat', sans-serif;
+    background: linear-gradient(to bottom, #1a0033, #3b0066, #6a00ff);
+    color:white;
+    overflow-x:hidden;
+    min-height:100vh;
+    position:relative;
+}
+
+/* ESTRELLAS */
+.estrellas{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+    animation:moverEstrellas 60s linear infinite;
+    z-index:-2;
+}
+
+@keyframes moverEstrellas{
+    from{ background-position:0 0; }
+    to{ background-position:1000px 1000px; }
+}
+
+/* HEADER */
+header{
+    text-align:center;
+    margin-top:50px;
+    z-index:2;
+    position:relative;
+}
+
+header h1{
+    font-size:3rem;
+    font-weight:900;
+    color:#ff66ff;
+    text-shadow:
+        0 0 10px #ff00cc,
+        0 0 20px #ff00cc,
+        0 0 40px #ff00cc;
+}
+
+header p{
+    margin-top:20px;
+    font-size:1.3rem;
+    font-weight:700;
+}
+
+/* CONTENEDOR TARJETAS */
+.contenedor-tarjetas{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:80px;
+    margin-top:100px;
+    position:relative;
+    z-index:2;
+}
+
+/* TARJETAS */
+.tarjeta{
+    width:380px;
+    padding:40px 30px 30px 30px;
+    border-radius:35px;
+    background: linear-gradient(145deg,#6a00ff,#b300ff);
+    border:6px solid #ff00cc;
+    box-shadow:
+        0 0 25px #ff00cc,
+        0 0 40px #b300ff;
+    text-align:center;
+    transition:0.4s ease;
+}
+
+.tarjeta:hover{
+    transform:scale(1.05);
+}
+
+.tarjeta p{
+    font-weight:700;
+    font-size:1.05rem;
+    line-height:1.7;
+    margin-bottom:30px;
+}
+
+/* BOTONES */
+.boton{
+    display:inline-block;
+    background: linear-gradient(90deg,#ff00cc,#ff66ff);
+    padding:16px 50px;
+    border-radius:50px;
+    font-weight:800;
+    text-decoration:none;
+    color:white;
+    box-shadow:0 0 20px #ff00cc;
+    transition:0.3s;
+}
+
+.boton:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 40px #ff00cc;
+}
+
+/* GRID 3D */
+.grid{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:220px;
+    background-image:
+        linear-gradient(#ff00cc33 1px, transparent 1px),
+        linear-gradient(90deg,#ff00cc33 1px, transparent 1px);
+    background-size: 40px 40px;
+    transform: perspective(300px) rotateX(60deg);
+    transform-origin: bottom;
+    z-index:1;
+}
+
+/* MANOS */
+.mano{
+    position:absolute;
+    bottom:20px;   /* 🔥 más abajo */
+    width:220px;
+    z-index:5;
+    pointer-events:none;
+    animation:flotar 3s ease-in-out infinite;
+}
+
+.izquierda{
+    left:22%;
+}
+
+.derecha{
+    right:22%;
+}
+
+/* Animación suave */
+@keyframes flotar{
+    0%{ transform:translateY(0px); }
+    50%{ transform:translateY(-10px); }
+    100%{ transform:translateY(0px); }
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .contenedor-tarjetas{
+        flex-direction:column;
+        gap:40px;
+    }
+
+    .mano{
+        display:none;
+    }
+}
