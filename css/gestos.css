@@ -96,6 +96,22 @@ body::before {
     box-shadow: 0 0 40px #ff00cc;
 }
 
+.btn-regresar {
+    background: linear-gradient(90deg, #ff00cc, #ff66ff);
+    border: none;
+    padding: 15px 60px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    color: white;
+    transition: 0.3s;
+    box-shadow: 0 0 20px #ff00cc;
+}
+
+.btn-regresar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px #ff00cc;
+}
 /* ===================================== */
 /* NAVBAR */
 /* ===================================== */

@@ -1,109 +1,120 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Nova - Asistente de Voz</title>
+    <meta charset="UTF-8">
+    <title>Nova - Asistente de Voz</title>
 
-  <link rel="icon" type="image/png" href="img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 
-  <!-- CSS externo -->
-  <link rel="stylesheet" href="css/voz.css">
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="css/voz.css">
 </head>
 
 <body>
 
-<div class="estrellas"></div>
+    <div class="estrellas"></div>
 
-<!-- ================== PANTALLA DE INICIO ================== -->
-<div id="inicio" class="pantalla-inicio">
-  <div class="inicio-contenido">
-    <h1>NOVA - ASISTENTE DE VOZ</h1>
-    <p>
-      Sistema de reconocimiento de voz inteligente.
-      Di "Nova" seguido de una orden para ejecutar acciones.
-    </p>
-    <button onclick="iniciarApp()" class="btn-neon">
-      Empezar
-    </button>
-  </div>
-</div>
-
-<!-- ================== APLICACIÓN ================== -->
-<div id="app" style="display:none;">
-
-  <div class="app-layout">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <h2>Órdenes</h2>
-      <ul>
-        <li>Nova avanzar</li>
-        <li>Nova retroceder</li>
-        <li>Nova detener</li>
-        <li>Nova vuelta derecha</li>
-        <li>Nova vuelta izquierda</li>
-        <li>Nova 90 derecha</li>
-        <li>Nova 90 izquierda</li>
-        <li>Nova 360 derecha</li>
-        <li>Nova 360 izquierda</li>
-      </ul>
-    </aside>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="main-content">
-
-      <div class="card-voz">
-
-        <h1>Nova</h1>
-        <p>Presiona el botón para activarme.</p>
-
-        <button id="btnActivar" class="btn-neon">
-          Activar Nova
-        </button>
-
-        <div id="estadoMicrofono" class="status">
-          🎤 Micrófono inactivo
+    <!-- ================== PANTALLA DE INICIO ================== -->
+    <div id="inicio" class="pantalla-inicio">
+        <div class="inicio-contenido">
+            <h1>NOVA - ASISTENTE DE VOZ</h1>
+            <p>
+                Sistema de reconocimiento de voz inteligente.
+                Di "Nova" seguido de una orden para ejecutar acciones.
+            </p>
+            <button onclick="iniciarApp()" class="btn-neon">
+                Empezar
+            </button>
         </div>
+    </div>
 
-        <div id="estadoSistema" class="status">
-          💤 Esperando activación
+    <!-- ================== APLICACIÓN ================== -->
+    <div id="app" style="display:none;">
+
+        <div class="app-layout">
+
+            <!-- SIDEBAR -->
+            <aside class="sidebar">
+                <h2>Órdenes</h2>
+                <ul>
+                    <li>Nova avanzar</li>
+                    <li>Nova retroceder</li>
+                    <li>Nova detener</li>
+                    <li>Nova vuelta derecha</li>
+                    <li>Nova vuelta izquierda</li>
+                    <li>Nova 90 derecha</li>
+                    <li>Nova 90 izquierda</li>
+                    <li>Nova 360 derecha</li>
+                    <li>Nova 360 izquierda</li>
+                </ul>
+            </aside>
+
+            <!-- CONTENIDO PRINCIPAL -->
+            <main class="main-content">
+
+                <div class="card-voz">
+
+                    <h1>Nova</h1>
+                    <p>Presiona el botón para activarme.</p>
+
+                    <button id="btnActivar" class="btn-neon">
+                        Activar Nova
+                    </button>
+
+                    <div id="estadoMicrofono" class="status">
+                        🎤 Micrófono inactivo
+                    </div>
+
+                    <div id="estadoSistema" class="status">
+                        💤 Esperando activación
+                    </div>
+
+                    <div>
+                        <strong>Texto Escuchado:</strong>
+                        <div class="box" id="textoEscuchado">---</div>
+                    </div>
+
+                    <div>
+                        <strong>Orden Recibida:</strong>
+                        <div class="highlight" id="ordenRecibida">Ninguna</div>
+                    </div>
+
+                    <div>
+                        <strong>Resultado:</strong>
+                        <div class="result" id="resultado">Esperando activación...</div>
+                    </div>
+
+                    <button onclick="volverMenu()" class="btn-neon btn-regresar">
+                        Volver al menú principal
+                    </button>
+                </div>
+            </main>
+
         </div>
+  <footer class="bg-dark text-white text-center p-3 mt-4">
+            Programado por: Arely
+        </footer>
+    </div>
 
-        <div>
-          <strong>Texto Escuchado:</strong>
-          <div class="box" id="textoEscuchado">---</div>
-        </div>
+    <script>
+        function iniciarApp() {
+            document.getElementById("inicio").style.display = "none";
+            document.getElementById("app").style.display = "block";
+        }
+    </script>
+    <script>
+        function volverMenu() {
+            window.location.href = "index.html";
+        }
+    </script>
 
-        <div>
-          <strong>Orden Recibida:</strong>
-          <div class="highlight" id="ordenRecibida">Ninguna</div>
-        </div>
-
-        <div>
-          <strong>Resultado:</strong>
-          <div class="result" id="resultado">Esperando activación...</div>
-        </div>
-
-      </div>
-
-    </main>
-
-  </div>
-
-</div>
-
-<script>
-function iniciarApp(){
-  document.getElementById("inicio").style.display = "none";
-  document.getElementById("app").style.display = "block";
-}
-</script>
-
-<script src="js/voz.js"></script>
+    <script src="js/voz.js"></script>
 
 </body>
+
 </html>

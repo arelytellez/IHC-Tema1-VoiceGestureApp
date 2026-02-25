@@ -18,10 +18,11 @@ body{
     z-index:-1;
 }
 
-/* PANTALLA INICIO */
+/* ===================================== */
+/* PANTALLA DE INICIO */
+/* ===================================== */
+
 .pantalla-inicio{
-    position:fixed;
-    width:100%;
     height:100vh;
     display:flex;
     justify-content:center;
@@ -29,19 +30,58 @@ body{
     text-align:center;
 }
 
+/* CONTENEDOR PRINCIPAL */
 .inicio-contenido{
     background: rgba(255,255,255,0.08);
-    padding:50px;
-    border-radius:20px;
-    backdrop-filter: blur(10px);
-    box-shadow:0 0 30px #00e5ff;
-    width:500px;
+    padding:70px 60px;
+    border-radius:30px;
+    border:4px solid #00e5ff;
+    backdrop-filter: blur(12px);
+    box-shadow:
+        0 0 20px #00e5ff,
+        0 0 40px rgba(0,229,255,0.6);
+    max-width:800px;
+    width:90%;
 }
 
+/* TITULO */
 .inicio-contenido h1{
-    text-shadow:0 0 15px #00e5ff;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight:900;
+    letter-spacing:2px;
+    margin-bottom:30px;
+    text-shadow:
+        0 0 10px #00e5ff,
+        0 0 25px #00e5ff;
 }
 
+/* DESCRIPCIÓN */
+.descripcion{
+    font-size:1.3rem;
+    font-weight:600;
+    line-height:1.7;
+    margin-bottom:40px;
+    opacity:0.9;
+}
+
+/* BOTÓN */
+.btn-comenzar{
+    background: linear-gradient(90deg,#00e5ff,#00bcd4);
+    border:none;
+    padding:15px 60px;
+    font-weight:800;
+    font-size:1.1rem;
+    border-radius:50px;
+    color:#000;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 20px #00e5ff;
+}
+
+.btn-comenzar:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 40px #00e5ff;
+}
 /* LAYOUT */
 .app-layout{
     display:flex;
@@ -73,13 +113,14 @@ body{
 
 /* TARJETA */
 .card-voz{
-    background: rgba(255,255,255,0.08);
-    padding:40px;
-    border-radius:20px;
-    backdrop-filter: blur(10px);
-    box-shadow:0 0 30px #00e5ff;
-    width:600px;
+    width:90%;
+    max-width:650px;
+    padding:60px 40px;
+    border-radius:25px;
+    background:linear-gradient(145deg,#3a0ca3,#560bad);
+    box-shadow:0 0 40px rgba(0,255,255,0.6);
     text-align:center;
+    position:relative;
 }
 
 /* BOTONES */
@@ -111,4 +152,14 @@ body{
 .status{
     margin:10px 0;
     font-weight:bold;
+}
+.card-voz h1{
+    font-size:2.3rem;
+    margin-bottom:20px;
+}
+
+.card-voz p{
+    font-size:1.1rem;
+    margin-bottom:35px;
+    line-height:1.6;
 }
