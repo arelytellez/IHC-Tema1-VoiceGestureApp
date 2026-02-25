@@ -1,28 +1,114 @@
-/* Fondo general */
-body {
-  background: linear-gradient(135deg, #0d6efd, #6610f2);
-  min-height: 100vh;
+body{
+    margin:0;
+    font-family:'Montserrat', sans-serif;
+    background: linear-gradient(180deg,#12002b,#2d0066,#4b0082);
+    color:white;
+    min-height:100vh;
+    overflow:hidden;
 }
 
-/* Card principal */
-.card {
-  border-radius: 15px;
+/* ESTRELLAS */
+.estrellas{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity:0.15;
+    z-index:-1;
 }
 
-/* Footer fijo abajo */
-footer {
-  position: relative;
-  bottom: 0;
-  width: 100%;
+/* PANTALLA INICIO */
+.pantalla-inicio{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
 }
 
-/* Texto escuchado */
-#textoEscuchado {
-  min-height: 50px;
+.inicio-contenido{
+    background: rgba(255,255,255,0.08);
+    padding:50px;
+    border-radius:20px;
+    backdrop-filter: blur(10px);
+    box-shadow:0 0 30px #00e5ff;
+    width:500px;
 }
 
-/* Orden recibida */
-#ordenRecibida {
-  min-height: 50px;
-  font-size: 1.2rem;
+.inicio-contenido h1{
+    text-shadow:0 0 15px #00e5ff;
+}
+
+/* LAYOUT */
+.app-layout{
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:260px;
+    background: rgba(0,0,0,0.4);
+    padding:30px 20px;
+}
+
+.sidebar li{
+    background: rgba(255,255,255,0.1);
+    padding:10px;
+    margin:10px 0;
+    border-radius:8px;
+    text-align:center;
+}
+
+/* MAIN */
+.main-content{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* TARJETA */
+.card-voz{
+    background: rgba(255,255,255,0.08);
+    padding:40px;
+    border-radius:20px;
+    backdrop-filter: blur(10px);
+    box-shadow:0 0 30px #00e5ff;
+    width:600px;
+    text-align:center;
+}
+
+/* BOTONES */
+.btn-neon{
+    background: linear-gradient(90deg,#00e5ff,#00bcd4);
+    padding:15px 40px;
+    border:none;
+    border-radius:40px;
+    font-weight:800;
+    color:white;
+    cursor:pointer;
+    box-shadow:0 0 20px #00e5ff;
+    transition:0.3s;
+}
+
+.btn-neon:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 40px #00e5ff;
+}
+
+/* BLOQUES */
+.box, .highlight, .result{
+    padding:15px;
+    border-radius:8px;
+    margin-top:10px;
+    background: rgba(255,255,255,0.1);
+}
+
+.status{
+    margin:10px 0;
+    font-weight:bold;
 }

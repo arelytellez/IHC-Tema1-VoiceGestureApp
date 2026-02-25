@@ -1,162 +1,109 @@
-Index.html
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Nova - Asistente de Voz</title>
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="img/favicon.png">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
-      min-height: 100vh;
-    }
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 
-    .app-layout {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    .sidebar {
-      width: 260px;
-      background: #1f2a3c;
-      padding: 30px 20px;
-      color: white;
-    }
-
-    .sidebar h2 {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .sidebar li {
-      background: #34495e;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    .main-content {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .card {
-      background: white;
-      width: 80%;
-      max-width: 800px;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-
-    button {
-      padding: 12px 25px;
-      border: none;
-      border-radius: 8px;
-      background: #2563eb;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      margin-bottom: 20px;
-    }
-
-    button:disabled {
-      background: gray;
-      cursor: default;
-    }
-
-    .status {
-      margin: 10px 0;
-      font-weight: bold;
-    }
-
-    .box, .highlight, .result {
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-    }
-
-    .box { background: #f1f5f9; }
-    .highlight { background: #cde7f0; }
-    .result { background: #f8fafc; }
-  </style>
+  <!-- CSS externo -->
+  <link rel="stylesheet" href="css/voz.css">
 </head>
 
 <body>
 
-<div class="app-layout">
+<div class="estrellas"></div>
 
-  <aside class="sidebar">
-    <h2>Órdenes Disponibles</h2>
-    <ul>
-      <li>Nova avanzar</li>
-      <li>Nova retroceder</li>
-      <li>Nova detener</li>
-      <li>Nova vuelta derecha</li>
-      <li>Nova vuelta izquierda</li>
-      <li>Nova 90 derecha</li>
-      <li>Nova 90 izquierda</li>
-      <li>Nova 360 derecha</li>
-      <li>Nova 360 izquierda</li>
-    </ul>
-  </aside>
+<!-- ================== PANTALLA DE INICIO ================== -->
+<div id="inicio" class="pantalla-inicio">
+  <div class="inicio-contenido">
+    <h1>NOVA - ASISTENTE DE VOZ</h1>
+    <p>
+      Sistema de reconocimiento de voz inteligente.
+      Di "Nova" seguido de una orden para ejecutar acciones.
+    </p>
+    <button onclick="iniciarApp()" class="btn-neon">
+      Empezar
+    </button>
+  </div>
+</div>
 
-  <main class="main-content">
-    <div class="card">
+<!-- ================== APLICACIÓN ================== -->
+<div id="app" style="display:none;">
 
-      <h1>Nova - Asistente de Voz</h1>
+  <div class="app-layout">
 
-      <p>
-        Hola, soy Nova, tu asistente de voz.
-        Presiona el botón para activarme.
-      </p>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2>Órdenes</h2>
+      <ul>
+        <li>Nova avanzar</li>
+        <li>Nova retroceder</li>
+        <li>Nova detener</li>
+        <li>Nova vuelta derecha</li>
+        <li>Nova vuelta izquierda</li>
+        <li>Nova 90 derecha</li>
+        <li>Nova 90 izquierda</li>
+        <li>Nova 360 derecha</li>
+        <li>Nova 360 izquierda</li>
+      </ul>
+    </aside>
 
-      <button id="btnActivar">Activar Nova</button>
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
 
-      <div id="estadoMicrofono" class="status">
-        🎤 Micrófono inactivo
+      <div class="card-voz">
+
+        <h1>Nova</h1>
+        <p>Presiona el botón para activarme.</p>
+
+        <button id="btnActivar" class="btn-neon">
+          Activar Nova
+        </button>
+
+        <div id="estadoMicrofono" class="status">
+          🎤 Micrófono inactivo
+        </div>
+
+        <div id="estadoSistema" class="status">
+          💤 Esperando activación
+        </div>
+
+        <div>
+          <strong>Texto Escuchado:</strong>
+          <div class="box" id="textoEscuchado">---</div>
+        </div>
+
+        <div>
+          <strong>Orden Recibida:</strong>
+          <div class="highlight" id="ordenRecibida">Ninguna</div>
+        </div>
+
+        <div>
+          <strong>Resultado:</strong>
+          <div class="result" id="resultado">Esperando activación...</div>
+        </div>
+
       </div>
 
-      <div id="estadoSistema" class="status">
-        💤 Esperando activación
-      </div>
+    </main>
 
-      <div>
-        <strong>Texto Escuchado:</strong>
-        <div class="box" id="textoEscuchado">---</div>
-      </div>
-
-      <div>
-        <strong>Orden Recibida:</strong>
-        <div class="highlight" id="ordenRecibida">Ninguna</div>
-      </div>
-
-      <div>
-        <strong>Resultado:</strong>
-        <div class="result" id="resultado">Esperando activación...</div>
-      </div>
-
-    </div>
-  </main>
+  </div>
 
 </div>
 
-<script src="assets/js/app.js"></script>
+<script>
+function iniciarApp(){
+  document.getElementById("inicio").style.display = "none";
+  document.getElementById("app").style.display = "block";
+}
+</script>
+
+<script src="js/voz.js"></script>
 
 </body>
 </html>
