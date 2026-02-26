@@ -8,7 +8,7 @@ const ordenRecibida = document.getElementById("ordenRecibida");
 const boton = document.getElementById("btnActivar");
 
 /* ==========================
-   COMANDOS
+   COMANDOS VÁLIDOS
 ========================== */
 const comandosValidos = [
   "avanzar",
@@ -23,7 +23,7 @@ const comandosValidos = [
 ];
 
 /* ==========================
-   VOZ (NO BLOQUEANTE)
+   VOZ (SÍNTESIS)
 ========================== */
 function hablar(texto) {
   window.speechSynthesis.cancel();
@@ -36,20 +36,103 @@ function hablar(texto) {
 }
 
 /* ==========================
-   API KEY
+   OBTENER API KEY
 ========================== */
 async function obtenerApiKey() {
   try {
     const response = await fetch(MOCKAPI_URL);
     const data = await response.json();
+
     OPENAI_API_KEY = data[0].apikey;
+
+    console.log("API KEY cargada correctamente");
+
   } catch (error) {
+    console.error("Error cargando API KEY:", error);
     estadoSistema.textContent = "Error al cargar API Key";
   }
 }
 
 /* ==========================
-   RECONOCIMIENTO
+   INTERPRETAR CON OPENAI
+========================== */
+async function interpretarConOpenAI(textoUsuario) {
+
+  if (!OPENAI_API_KEY) {
+    console.error("API KEY no disponible");
+    return null;
+  }
+
+  try {
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: `
+Eres un sistema que convierte frases en comandos de control para un carrito robot.
+
+SOLO puedes responder EXACTAMENTE con uno de estos comandos:
+
+avanzar
+retroceder
+detener
+vuelta derecha
+vuelta izquierda
+90 derecha
+90 izquierda
+360 derecha
+360 izquierda
+
+Si el usuario pide lo contrario de detener responde: avanzar.
+Si no hay intención clara responde: ninguno.
+
+No expliques nada.
+Responde solo el comando.
+`
+          },
+          {
+            role: "user",
+            content: textoUsuario
+          }
+        ],
+        temperature: 0
+      })
+    });
+
+    const data = await response.json();
+
+    if (!data.choices) {
+      console.error("Respuesta inválida:", data);
+      return null;
+    }
+
+    const respuesta = data.choices[0].message.content
+      .toLowerCase()
+      .trim();
+
+    console.log("Respuesta IA:", respuesta);
+
+    if (respuesta === "ninguno") return null;
+
+    return respuesta;
+
+  } catch (error) {
+    console.error("Error OpenAI:", error);
+    estadoSistema.textContent = "Error al consultar IA";
+    return null;
+  }
+}
+
+/* ==========================
+   RECONOCIMIENTO DE VOZ
 ========================== */
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -64,15 +147,15 @@ recognition.onstart = () => {
 };
 
 recognition.onerror = (event) => {
+  console.error("Error micrófono:", event.error);
   estadoSistema.textContent = "Error micrófono: " + event.error;
 };
 
-/* 🔥 Reinicio automático */
 recognition.onend = () => {
-  recognition.start();
+  recognition.start(); // reinicio automático
 };
 
-recognition.onresult = (event) => {
+recognition.onresult = async (event) => {
 
   const texto = event.results[event.results.length - 1][0].transcript
     .toLowerCase()
@@ -80,22 +163,21 @@ recognition.onresult = (event) => {
 
   textoEscuchado.textContent = texto;
 
-  // Solo ejecutar si incluye "nova"
   if (!texto.includes("nova")) return;
 
-  const comandoEncontrado = comandosValidos.find(cmd =>
-    texto.includes(cmd)
-  );
+  estadoSistema.textContent = "Analizando comando con IA...";
 
-  if (comandoEncontrado) {
+  const comandoIA = await interpretarConOpenAI(texto);
 
-    ordenRecibida.textContent = comandoEncontrado;
+  if (comandoIA && comandosValidos.includes(comandoIA)) {
+
+    ordenRecibida.textContent = comandoIA;
     estadoSistema.textContent = "Orden ejecutada";
 
-    enviarComandoAlCarrito(comandoEncontrado);
+    enviarComandoAlCarrito(comandoIA);
 
   } else {
-    estadoSistema.textContent = "Comando no reconocido";
+    estadoSistema.textContent = "No se detectó una orden válida";
   }
 };
 
@@ -109,7 +191,7 @@ function enviarComandoAlCarrito(comando) {
 }
 
 /* ==========================
-   INICIAR
+   INICIAR APLICACIÓN
 ========================== */
 async function iniciarAplicacion() {
 
@@ -120,11 +202,9 @@ async function iniciarAplicacion() {
 
   await obtenerApiKey();
 
-  // 🔥 MOSTRAR MENSAJE EN PANTALLA
   estadoSistema.textContent = "Di: Nova + comando";
 
-  // 🔥 OPCIONAL: mensaje hablado (no bloquea)
-  hablar("Hola, soy Nova, tu asistente de voz. Estoy listo para recibir tus instrucciones.Recuerda comenzar cada comando diciendo mi nombre");
+  hablar("Hola, soy Nova, tu asistente de voz. Estoy lista para recibir tus instrucciones. Recuerda comenzar cada comando diciendo mi nombre.");
 
   recognition.start();
 }
