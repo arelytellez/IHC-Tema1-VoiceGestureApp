@@ -293,3 +293,6 @@ footer {
     background: linear-gradient(45deg, #ff0040, #ff7300);
     box-shadow: 0 0 15px #ff0040;
 }
+video, canvas {
+  transform: scaleX(-1);
+}
